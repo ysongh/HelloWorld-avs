@@ -248,6 +248,25 @@
   },
   {
     "type": "function",
+    "name": "eventnames",
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "getOperatorRestakedStrategies",
     "inputs": [
       {
@@ -394,6 +413,11 @@
         "name": "signature",
         "type": "bytes",
         "internalType": "bytes"
+      },
+      {
+        "name": "eventName",
+        "type": "string",
+        "internalType": "string"
       }
     ],
     "outputs": [],

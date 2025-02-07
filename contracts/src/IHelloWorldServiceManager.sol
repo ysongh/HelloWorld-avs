@@ -29,6 +29,7 @@ interface IHelloWorldServiceManager {
     function respondToTask(
         Task calldata task,
         uint32 referenceTaskIndex,
-        bytes calldata signature
+        bytes calldata signature,
+        string calldata eventName
     ) external;
 }

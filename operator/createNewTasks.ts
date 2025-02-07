@@ -41,6 +41,15 @@ async function createNewTask(taskName: string) {
   }
 }
 
+async function readEventNames() {
+  try {
+    const eventnames = await helloWorldServiceManager.eventnames(0);
+    console.log(eventnames);
+  } catch (error) {
+    console.error('Error reading event names:', error);
+  }
+}
+
 // Function to create a new task with a random name every 15 seconds
 function startCreatingTasks() {
   setInterval(() => {
@@ -52,3 +61,7 @@ function startCreatingTasks() {
 
 // Start the process
 startCreatingTasks();
+
+
+// For testing
+// readEventNames();

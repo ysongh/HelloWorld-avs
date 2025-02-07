@@ -58,7 +58,8 @@ const signAndRespondToTask = async (taskIndex: number, taskCreatedBlock: number,
     const tx = await helloWorldServiceManager.respondToTask(
         { name: taskName, taskCreatedBlock: taskCreatedBlock },
         taskIndex,
-        signedTask
+        signedTask,
+        taskName,
     );
     await tx.wait();
     console.log(`Responded to task.`);
