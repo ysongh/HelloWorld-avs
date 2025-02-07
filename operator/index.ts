@@ -55,14 +55,32 @@ const signAndRespondToTask = async (taskIndex: number, taskCreatedBlock: number,
         [operators, signatures, ethers.toBigInt(await provider.getBlockNumber()-1)]
     );
 
-    const tx = await helloWorldServiceManager.respondToTask(
-        { name: taskName, taskCreatedBlock: taskCreatedBlock },
-        taskIndex,
-        signedTask,
-        taskName,
-    );
-    await tx.wait();
-    console.log(`Responded to task.`);
+    try {
+        const response = await fetch('http://localhost:4000/chechissafe/gemini', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ content: taskName })
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+
+        const tx = await helloWorldServiceManager.respondToTask(
+            { name: taskName, taskCreatedBlock: taskCreatedBlock },
+            taskIndex,
+            signedTask,
+            data.text,
+        );
+        await tx.wait();
+        console.log(`Responded to task.`);
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
 };
 
 const registerOperator = async () => {

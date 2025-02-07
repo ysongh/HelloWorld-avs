@@ -27,10 +27,26 @@ function generateRandomTasks(): string {
     return randomTasks;
   }
 
-async function createNewTask(taskName: string) {
+// async function createNewTask(taskName: string) {
+//   try {
+//     // Send a transaction to the createNewTask function
+//     const tx = await helloWorldServiceManager.createNewTask(taskName);
+    
+//     // Wait for the transaction to be mined
+//     const receipt = await tx.wait();
+    
+//     console.log(`Transaction successful with hash: ${receipt.hash}`);
+//   } catch (error) {
+//     console.error('Error sending transaction:', error);
+//   }
+// }
+
+async function createNewTask() {
   try {
     // Send a transaction to the createNewTask function
-    const tx = await helloWorldServiceManager.createNewTask(taskName);
+
+    const tx = await helloWorldServiceManager.createNewTask("123 Green St");
+    // const tx = await helloWorldServiceManager.createNewTask("125 W 18th St, New York, NY 10011, United States");
     
     // Wait for the transaction to be mined
     const receipt = await tx.wait();
@@ -40,6 +56,7 @@ async function createNewTask(taskName: string) {
     console.error('Error sending transaction:', error);
   }
 }
+
 
 async function readEventNames() {
   try {
@@ -51,17 +68,18 @@ async function readEventNames() {
 }
 
 // Function to create a new task with a random name every 15 seconds
-function startCreatingTasks() {
-  setInterval(() => {
-    const randomTasks = generateRandomTasks();
-    console.log(`Creating new task: ${randomTasks}`);
-    createNewTask(randomTasks);
-  }, 24000);
-}
+// function startCreatingTasks() {
+//   setInterval(() => {
+//     const randomTasks = generateRandomTasks();
+//     console.log(`Creating new task: ${randomTasks}`);
+//     createNewTask(randomTasks);
+//   }, 24000);
+// }
 
 // Start the process
-startCreatingTasks();
+// startCreatingTasks();
 
 
 // For testing
 // readEventNames();
+createNewTask();
