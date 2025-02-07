@@ -17,14 +17,14 @@ const helloWorldServiceManagerABI = JSON.parse(fs.readFileSync(path.resolve(__di
 const helloWorldServiceManager = new ethers.Contract(helloWorldServiceManagerAddress, helloWorldServiceManagerABI, wallet);
 
 
-// Function to generate random names
-function generateRandomName(): string {
-    const adjectives = ['Quick', 'Lazy', 'Sleepy', 'Noisy', 'Hungry'];
-    const nouns = ['Fox', 'Dog', 'Cat', 'Mouse', 'Bear'];
+// Function to generate random tasks
+function generateRandomTasks(): string {
+    const adjectives = ['Clean up', 'Paint the', 'Fix the', 'Build the', 'Take picture of the'];
+    const nouns = ['Bathroom', 'Kitchen', 'Living Room', 'Shop', 'Basement'];
     const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
     const noun = nouns[Math.floor(Math.random() * nouns.length)];
-    const randomName = `${adjective}${noun}${Math.floor(Math.random() * 1000)}`;
-    return randomName;
+    const randomTasks = `${adjective} ${noun}`;
+    return randomTasks;
   }
 
 async function createNewTask(taskName: string) {
@@ -44,9 +44,9 @@ async function createNewTask(taskName: string) {
 // Function to create a new task with a random name every 15 seconds
 function startCreatingTasks() {
   setInterval(() => {
-    const randomName = generateRandomName();
-    console.log(`Creating new task with name: ${randomName}`);
-    createNewTask(randomName);
+    const randomTasks = generateRandomTasks();
+    console.log(`Creating new task: ${randomTasks}`);
+    createNewTask(randomTasks);
   }, 24000);
 }
 
