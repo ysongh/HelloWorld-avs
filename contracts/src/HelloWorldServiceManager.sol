@@ -115,4 +115,7 @@ contract HelloWorldServiceManager is ECDSAServiceManagerBase, IHelloWorldService
         emit TaskResponded(referenceTaskIndex, task, msg.sender);
     }
 
+    function getTravelEvents() public view returns (TravelEvent[] memory){
+        return travelEvents;
+    }
 }

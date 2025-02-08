@@ -60,7 +60,7 @@ async function createNewTask() {
 
 async function readTravelEvent() {
   try {
-    const eventnames = await helloWorldServiceManager.travelEvents(0);
+    const eventnames = await helloWorldServiceManager.getTravelEvents();
     console.log(eventnames);
   } catch (error) {
     console.error('Error reading event names:', error);
