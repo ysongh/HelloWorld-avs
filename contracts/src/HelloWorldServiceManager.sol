@@ -85,7 +85,8 @@ contract HelloWorldServiceManager is ECDSAServiceManagerBase, IHelloWorldService
         Task calldata task,
         uint32 referenceTaskIndex,
         bytes memory signature,
-        string calldata eventName
+        string calldata eventName,
+        bool isSafeToPost
     ) external {
         // check that the task is valid, hasn't been responsed yet, and is being responded in time
         require(
@@ -108,7 +109,7 @@ contract HelloWorldServiceManager is ECDSAServiceManagerBase, IHelloWorldService
         // updating the storage with task responses
         allTaskResponses[msg.sender][referenceTaskIndex] = signature;
 
-        eventnames.push(eventName);
+        if (isSafeToPost) eventnames.push(eventName);
 
         // emitting event
         emit TaskResponded(referenceTaskIndex, task, msg.sender);

@@ -30,6 +30,7 @@ interface IHelloWorldServiceManager {
         Task calldata task,
         uint32 referenceTaskIndex,
         bytes calldata signature,
-        string calldata eventName
+        string calldata eventName,
+        bool isSafeToPost
     ) external;
 }

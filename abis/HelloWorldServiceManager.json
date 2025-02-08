@@ -418,6 +418,11 @@
         "name": "eventName",
         "type": "string",
         "internalType": "string"
+      },
+      {
+        "name": "isSafeToPost",
+        "type": "bool",
+        "internalType": "bool"
       }
     ],
     "outputs": [],
