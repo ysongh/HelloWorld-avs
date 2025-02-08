@@ -247,12 +247,12 @@ contract HelloWorldTaskManagerSetup is Test {
         return signatures;
     }
 
-    function createTask(TrafficGenerator memory generator, string memory taskName) internal {
+    function createTask(TrafficGenerator memory generator, string memory taskName,  string memory location) internal {
         IHelloWorldServiceManager helloWorldServiceManager =
             IHelloWorldServiceManager(helloWorldDeployment.helloWorldServiceManager);
 
         vm.prank(generator.key.addr);
-        helloWorldServiceManager.createNewTask(taskName);
+        helloWorldServiceManager.createNewTask(taskName, location);
     }
 
     function respondToTask(
@@ -377,9 +377,9 @@ contract CreateTask is HelloWorldTaskManagerSetup {
 
     function testCreateTask() public {
         string memory taskName = "Test Task";
-
+        string memory location = "123 Green Street";
         vm.prank(generator.key.addr);
-        IHelloWorldServiceManager.Task memory newTask = sm.createNewTask(taskName);
+        IHelloWorldServiceManager.Task memory newTask = sm.createNewTask(taskName, location);
 
         require(sha256(abi.encodePacked(newTask.name)) == sha256(abi.encodePacked(taskName)), "Task name not set correctly");
         require(newTask.taskCreatedBlock == uint32(block.number), "Task created block not set correctly");
@@ -426,7 +426,7 @@ contract RespondToTask is HelloWorldTaskManagerSetup {
     function testRespondToTask() public {
         string memory taskName = "TestTask";
         string memory location = "123 Green St";
-        IHelloWorldServiceManager.Task memory newTask = sm.createNewTask(taskName);
+        IHelloWorldServiceManager.Task memory newTask = sm.createNewTask(taskName, location);
         uint32 taskIndex = sm.latestTaskNum() - 1;
 
         bytes32 messageHash = keccak256(abi.encodePacked("Hello, ", taskName));

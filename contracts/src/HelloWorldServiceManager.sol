@@ -66,7 +66,8 @@ contract HelloWorldServiceManager is ECDSAServiceManagerBase, IHelloWorldService
     /* FUNCTIONS */
     // NOTE: this function creates new task, assigns it a taskId
     function createNewTask(
-        string memory name
+        string memory name,
+        string memory location
     ) external returns (Task memory) {
         // create a new task struct
         Task memory newTask;
@@ -75,7 +76,7 @@ contract HelloWorldServiceManager is ECDSAServiceManagerBase, IHelloWorldService
 
         // store hash of task onchain, emit event, and increase taskNum
         allTaskHashes[latestTaskNum] = keccak256(abi.encode(newTask));
-        emit NewTaskCreated(latestTaskNum, newTask);
+        emit NewTaskCreated(latestTaskNum, newTask, location);
         latestTaskNum = latestTaskNum + 1;
 
         return newTask;

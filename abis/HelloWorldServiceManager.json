@@ -141,6 +141,11 @@
         "name": "name",
         "type": "string",
         "internalType": "string"
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "internalType": "string"
       }
     ],
     "outputs": [
@@ -576,6 +581,12 @@
             "internalType": "uint32"
           }
         ]
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
       }
     ],
     "anonymous": false

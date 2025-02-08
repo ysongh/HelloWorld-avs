@@ -2,7 +2,7 @@
 pragma solidity ^0.8.9;
 
 interface IHelloWorldServiceManager {
-    event NewTaskCreated(uint32 indexed taskIndex, Task task);
+    event NewTaskCreated(uint32 indexed taskIndex, Task task, string location);
 
     event TaskResponded(uint32 indexed taskIndex, Task task, address operator);
 
@@ -28,7 +28,8 @@ interface IHelloWorldServiceManager {
     ) external view returns (bytes memory);
 
     function createNewTask(
-        string memory name
+        string memory name,
+        string memory location
     ) external returns (Task memory);
 
     function respondToTask(

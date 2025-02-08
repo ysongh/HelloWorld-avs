@@ -45,7 +45,7 @@ async function createNewTask() {
   try {
     // Send a transaction to the createNewTask function
 
-    const tx = await helloWorldServiceManager.createNewTask("Hackathon");
+    const tx = await helloWorldServiceManager.createNewTask("Hackathon", "345 Blue Street");
     // const tx = await helloWorldServiceManager.createNewTask("125 W 18th St, New York, NY 10011, United States");
     
     // Wait for the transaction to be mined
