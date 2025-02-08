@@ -45,7 +45,7 @@ async function createNewTask() {
   try {
     // Send a transaction to the createNewTask function
 
-    const tx = await helloWorldServiceManager.createNewTask("123 Green St");
+    const tx = await helloWorldServiceManager.createNewTask("Hackathon");
     // const tx = await helloWorldServiceManager.createNewTask("125 W 18th St, New York, NY 10011, United States");
     
     // Wait for the transaction to be mined
@@ -58,9 +58,9 @@ async function createNewTask() {
 }
 
 
-async function readEventNames() {
+async function readTravelEvent() {
   try {
-    const eventnames = await helloWorldServiceManager.eventnames(0);
+    const eventnames = await helloWorldServiceManager.travelEvents(0);
     console.log(eventnames);
   } catch (error) {
     console.error('Error reading event names:', error);
@@ -81,5 +81,5 @@ async function readEventNames() {
 
 
 // For testing
-// readEventNames();
-createNewTask();
+readTravelEvent();
+// createNewTask();

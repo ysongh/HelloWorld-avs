@@ -11,6 +11,11 @@ interface IHelloWorldServiceManager {
         uint32 taskCreatedBlock;
     }
 
+     struct TravelEvent {
+        string name;
+        string location;
+    }
+
     function latestTaskNum() external view returns (uint32);
 
     function allTaskHashes(
@@ -30,7 +35,7 @@ interface IHelloWorldServiceManager {
         Task calldata task,
         uint32 referenceTaskIndex,
         bytes calldata signature,
-        string calldata eventName,
+        string calldata location,
         bool isSafeToPost
     ) external;
 }

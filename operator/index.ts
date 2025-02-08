@@ -74,7 +74,7 @@ const signAndRespondToTask = async (taskIndex: number, taskCreatedBlock: number,
             { name: taskName, taskCreatedBlock: taskCreatedBlock },
             taskIndex,
             signedTask,
-            taskName,
+            "123 Green Stree",
             true
         );
         await tx.wait();

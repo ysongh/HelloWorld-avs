@@ -273,7 +273,7 @@ contract HelloWorldTaskManagerSetup is Test {
         bytes memory signedTask = abi.encode(operators, signatures, uint32(block.number));
 
         IHelloWorldServiceManager(helloWorldDeployment.helloWorldServiceManager).respondToTask(
-            task, referenceTaskIndex, signedTask, task.name, true
+            task, referenceTaskIndex, signedTask, "123 Green Street", true
         );
     }
 }
@@ -425,6 +425,7 @@ contract RespondToTask is HelloWorldTaskManagerSetup {
 
     function testRespondToTask() public {
         string memory taskName = "TestTask";
+        string memory location = "123 Green St";
         IHelloWorldServiceManager.Task memory newTask = sm.createNewTask(taskName);
         uint32 taskIndex = sm.latestTaskNum() - 1;
 
@@ -440,6 +441,6 @@ contract RespondToTask is HelloWorldTaskManagerSetup {
         bytes memory signedTask = abi.encode(operatorsMem, signatures, uint32(block.number));
 
         vm.roll(block.number+1);
-        sm.respondToTask(newTask, taskIndex, signedTask, taskName, true);
+        sm.respondToTask(newTask, taskIndex, signedTask, location, true);
     }
 }

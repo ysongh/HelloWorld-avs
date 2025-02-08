@@ -31,7 +31,7 @@ contract HelloWorldServiceManager is ECDSAServiceManagerBase, IHelloWorldService
     // mapping of task indices to hash of abi.encode(taskResponse, taskResponseMetadata)
     mapping(address => mapping(uint32 => bytes)) public allTaskResponses;
 
-    string[] public eventnames;
+    TravelEvent[] public travelEvents;
 
     modifier onlyOperator() {
         require(
@@ -85,7 +85,7 @@ contract HelloWorldServiceManager is ECDSAServiceManagerBase, IHelloWorldService
         Task calldata task,
         uint32 referenceTaskIndex,
         bytes memory signature,
-        string calldata eventName,
+        string calldata location,
         bool isSafeToPost
     ) external {
         // check that the task is valid, hasn't been responsed yet, and is being responded in time
@@ -109,7 +109,7 @@ contract HelloWorldServiceManager is ECDSAServiceManagerBase, IHelloWorldService
         // updating the storage with task responses
         allTaskResponses[msg.sender][referenceTaskIndex] = signature;
 
-        if (isSafeToPost) eventnames.push(eventName);
+        if (isSafeToPost) travelEvents.push(TravelEvent(task.name, location));
 
         // emitting event
         emit TaskResponded(referenceTaskIndex, task, msg.sender);
