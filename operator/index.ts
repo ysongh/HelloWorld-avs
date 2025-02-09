@@ -55,27 +55,31 @@ const signAndRespondToTask = async (taskIndex: number, taskCreatedBlock: number,
         [operators, signatures, ethers.toBigInt(await provider.getBlockNumber()-1)]
     );
 
-    try {
-        // const response = await fetch('http://localhost:4000/chechissafe/gemini', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({ content: taskName })
-        // });
+    console.log(`Calling Gemini API...}`);
 
-        // if (!response.ok) {
-        //   throw new Error(`HTTP error: ${response.status}`);
-        // }
-        // const data = await response.json();
-        // console.log(data);
+    try {
+        const response = await fetch('http://localhost:4000/chechissafe/gemini', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ content: location })
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+
+        const isRealLcoation = data.text.includes("not real") ? false : true;
 
         const tx = await helloWorldServiceManager.respondToTask(
             { name: taskName, taskCreatedBlock: taskCreatedBlock },
             taskIndex,
             signedTask,
             location,
-            true
+            isRealLcoation
         );
         await tx.wait();
         console.log(`Responded to task.`);
@@ -144,7 +148,7 @@ const monitorNewTasks = async () => {
     //await helloWorldServiceManager.createNewTask("EigenWorld");
 
     helloWorldServiceManager.on("NewTaskCreated", async (taskIndex: number, task: any, location: string) => {
-        console.log(`New task detected: Hello, ${task.name}`);
+        console.log(`New task detected: ${task.name} -  ${location}`);
         await signAndRespondToTask(taskIndex, task.taskCreatedBlock, task.name, location);
     });
 
