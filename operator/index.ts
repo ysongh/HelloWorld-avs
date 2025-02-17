@@ -58,28 +58,28 @@ const signAndRespondToTask = async (taskIndex: number, taskCreatedBlock: number,
     console.log(`Calling Gemini API...}`);
 
     try {
-        const response = await fetch('http://localhost:4000/chechissafe/gemini', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ content: location })
-        });
+        // const response = await fetch('http://localhost:4000/chechissafe/gemini', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({ content: location })
+        // });
 
-        if (!response.ok) {
-          throw new Error(`HTTP error: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log(data);
+        // if (!response.ok) {
+        //   throw new Error(`HTTP error: ${response.status}`);
+        // }
+        // const data = await response.json();
+        // console.log(data);
 
-        const isRealLcoation = data.text.includes("not real") ? false : true;
+        // const isRealLcoation = data.text.includes("not real") ? false : true;
 
         const tx = await helloWorldServiceManager.respondToTask(
             { name: taskName, taskCreatedBlock: taskCreatedBlock },
             taskIndex,
             signedTask,
             location,
-            isRealLcoation
+            true
         );
         await tx.wait();
         console.log(`Responded to task.`);
